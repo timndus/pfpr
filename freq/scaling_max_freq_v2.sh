@@ -1,0 +1,1 @@
+echo $2 > /sys/devices/system/cpu/cpufreq/policy$1/scaling_max_freq
