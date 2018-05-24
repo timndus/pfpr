@@ -1,7 +1,6 @@
 #!/bin/bash
-~/code/freq/./set_to_all.sh "$1" 
-for (( j=0; j<20; j++ ))
+for (( j=0; j<269; j++ ))
 do
-	~/code/rapl/rapl-read | awk 'NR==15 {print $3}' >> ~/code/rapl/log/e_"$1"_no.log
+	~/code/rapl/e_read | awk 'NR==15 {print $3}' >> "$1".log
 	sleep 2
 done
