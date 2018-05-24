@@ -6,12 +6,12 @@ import csv
 y1 = []
 y2 = []
 
-with open('bench_v6_default.log','r') as csvfile:
+with open('v6_default.log','r') as csvfile:
     plots = csv.reader(csvfile, delimiter='\n')
     for row in plots:
         y1.append(float(row[0]))
 
-with open('bench_v6.log','r') as csvfile:
+with open('v6.log','r') as csvfile:
     plots = csv.reader(csvfile, delimiter='\n')
     for row in plots:
         y2.append(float(row[0]))

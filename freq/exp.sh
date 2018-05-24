@@ -1,5 +1,5 @@
-for i in {1..64}
+while :
 do
-	sleep 2
-	mpiexec -bind-to user:0,1 -n 2 /home/timndus/code/mpich_benchmark/./a.out
+	sleep 0.5
+	cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_cur_freq >> ~/code/mpich_benchmark/freq_v6.log
 done
