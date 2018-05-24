@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define LEN 256
+#define SIZE 5000
 
 int main(int argc, char** argv)
 {
@@ -13,14 +13,20 @@ int main(int argc, char** argv)
   int world_size;
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-  int i = 0;
-  while(1)
+  
+  double arr[SIZE];
+  for (int i = 0; i < SIZE; i++)
   {
-  	i++;
-	if(i == 2000000)
-	{
-		i = 0;
-	}
+    arr[i] = i;
+  }
+
+  for (int j = 0; j < 1000000; j++)
+  {
+    /* code */
+    for (int i = 0; i < SIZE - 1; ++i)
+    {
+      arr[i] = arr[i] + arr[i + 1];
+    }
   }
 
   MPI_Finalize();
