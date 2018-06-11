@@ -42,6 +42,8 @@ int main(int argc, char** argv) {
     MPI_Recv(&number, 1, MPI_INT, 1, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     printf("process 0 reporte: data received from proccess 1, so task can done.\n");
 
+    for(double i = 0; i < 2000000000; i++){}
+    
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("%ld\n", CLOCKS_PER_SEC);
@@ -59,7 +61,9 @@ int main(int argc, char** argv) {
     printf("process 1 task is done, i'm sending result to process 0 ...\n");
     MPI_Send(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);   
     //MPI_Recv(&number, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-    printf("proccess 1 report, send is done.\n");
+    printf("proccess 1 report, send is done. so go to run my loop 2\n");
+
+    for(double j = 0; j < 4000000000; j++){}
   }
   MPI_Finalize();
 }
