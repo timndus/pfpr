@@ -1,5 +1,6 @@
-echo userspace > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-echo userspace > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-echo userspace > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
-echo userspace > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
-
+#!/bin/bash
+cpu_count=$(nproc)
+for (( i=0; i<cpu_count; i++ ))
+do
+	echo userspace > /sys/devices/system/cpu/cpu$i/cpufreq/scaling_governor
+done
