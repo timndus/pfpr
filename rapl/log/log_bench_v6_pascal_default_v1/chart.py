@@ -12,6 +12,7 @@ with open('tst.log','r') as csvfile:
 
 
 plt.plot(y1, label='bench_v6_default_mpi')
+plt.plot(y1, '+')
 
 plt.xlabel('Sample number')
 plt.ylabel('Power(W)')
