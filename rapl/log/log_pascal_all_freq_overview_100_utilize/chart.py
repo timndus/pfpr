@@ -127,5 +127,5 @@ plt.ylabel('Power(W)')
 
 plt.title('')
 plt.legend()
-#plt.savefig('foo.png', dpi=1500)
+plt.savefig('overview_100.png', dpi=500)
 plt.show()
