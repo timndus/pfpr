@@ -1,5 +1,5 @@
-for i in {1..16}
+for i in {1..$1}
 do
 	sleep 2
-	mpiexec -bind-to user:0,1,2,3 -n 4 ./a.out | tail -n 1 | tee -a bench_v6_pascal_v0.log
+	mpiexec -bind-to user:0,1,2,3 -n 4 ./a.out | tail -n 1 | tee -a $2.log
 done
