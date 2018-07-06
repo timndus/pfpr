@@ -39,7 +39,6 @@ do
 
 
 
-
 	./set_to_all.sh 1600000
 	sleep 10
 	
@@ -47,7 +46,8 @@ do
 	sleep 5
 
 	./set_freq.sh 0 1600000
-	./set_freq.sh 1 1900000
+	./set_freq.sh 1 1600000
+	./set_freq.sh 2 1600000
 	sleep 5
 
 	
