@@ -16,14 +16,14 @@ int main(int argc, char** argv) {
     int world_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
 
-    for (long i = 0; i < 3000000000; i++)
+    for (int j = 0; j < 2; j++)
     {
-    	
+    	for (long i = 0; i < 4000000000; i++){}
     }
 
     MPI_Finalize();
 
     clock_gettime (CLOCK_REALTIME, &tend);
     long int t = (tend.tv_sec * 1000000000 + tend.tv_nsec) - (tstart.tv_sec * 1000000000 + tstart.tv_nsec);
-    printf("%ld.%ld\n", t / 1000000000, t % 1000000000 );
+    printf("[%d]\t%ld.%ld\n", world_rank, t / 1000000000, t % 1000000000 );
 }

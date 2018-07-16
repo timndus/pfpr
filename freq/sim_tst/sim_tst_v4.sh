@@ -19,6 +19,8 @@ do
 
 	~/code/freq/./set_freq.sh 3 1800000
 	sleep 10
+	
+	~/code/freq/./set_to_all.sh 1600000
 
 	echo "end, test $i"
 done
