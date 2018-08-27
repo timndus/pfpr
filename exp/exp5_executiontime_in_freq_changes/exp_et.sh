@@ -4,7 +4,7 @@ do
 	do
 		sleep 2
 		~/msc_project/freq/./set_freq_to_all.sh $i
-		mpiexec -bind-to user:0,1,2,3,4,5 -n 6 ./et | tee -a error_effect_$i.log
+		mpiexec -bind-to user:0,1,2,3,4,5 -n 6 ./et | tee -a et_$i.log
 
 	done
 done
