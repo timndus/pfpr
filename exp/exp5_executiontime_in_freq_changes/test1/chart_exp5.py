@@ -11,7 +11,7 @@ with open('et_all.log','r') as csvfile:
         y1.append(float(row[0]))
 
 plt.plot(y1, label='et_change_with_freq_change')
-plt.plot(y1, 'o')
+plt.plot(y1, '.')
 
 plt.xlabel('x label')
 plt.ylabel('ET')
