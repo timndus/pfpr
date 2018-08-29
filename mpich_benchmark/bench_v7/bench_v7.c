@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 		to_do(5);
 		printf("[%d] loop B end => send response to [%d]\n", world_rank, send_source);
 	   	MPI_Send(&number, 1, MPI_INT, send_source, 0, MPI_COMM_WORLD);
-		printf("[%d] core is done\n\n", world_rank);
+		printf("[%d] core is done\n", world_rank);
 	}
 	else
 	{
@@ -79,7 +79,7 @@ int main(int argc, char** argv)
 		   	MPI_Send(&number, 1, MPI_INT, send_source, 0, MPI_COMM_WORLD);
 	    	MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			to_do(steps - world_rank + 1 + 1);
-			printf("[%d] core is done\n\n", world_rank);
+			printf("[%d] loop B end => core is done\n\n", world_rank);
 		}
 	}
 
