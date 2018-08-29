@@ -78,8 +78,10 @@ int main(int argc, char** argv)
 
 		   	MPI_Send(&number, 1, MPI_INT, send_source, 0, MPI_COMM_WORLD);
 	    	MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-			to_do(steps - world_rank + 1 + 1);
-			printf("[%d] loop B end => core is done\n\n", world_rank);
+
+	    	printf("[%d] response from [%d] => loop B start\n", world_rank, recv_source);
+			to_do(steps - world_rank - 1 - 1);
+			printf("[%d] loop B end => core is done\n", world_rank);
 		}
 	}
 
