@@ -87,9 +87,9 @@ int main(int argc, char** argv)
 
 	clock_gettime (CLOCK_REALTIME, &tend);
 	long int t = (tend.tv_sec * 1000000000 + tend.tv_nsec) - (tstart.tv_sec * 1000000000 + tstart.tv_nsec);
-	printf("[%d]: %ld.%ld\n", world_rank, t / 1000000000, t % 1000000000 );
 	
 	MPI_Finalize();
+	printf("[%d]: %ld.%ld\n", world_rank, t / 1000000000, t % 1000000000 );
 }
 
 void to_do(int repeat)
