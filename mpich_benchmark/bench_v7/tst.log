@@ -1,0 +1,90 @@
+[0] loop A start
+[1] loop A start
+[4] loop A start
+[5] loop A start
+[2] loop A start
+[3] loop A start
+[0] loop A end => request to [1] start
+[1] loop A end => send response to [0] and request to [2] start
+[0] response from [1] => loop B start
+[2] loop A end => send response to [1] and request to [3] start
+[1] response from [2] => loop B start
+[3] loop A end => send response to [2] and request to [4] start
+[2] response from [3] => loop B start
+[4] loop A end => send response to [3] and request to [5] start
+[3] response from [4] => loop B start
+[5] loop A end => send response to [4] and request to [0] start
+[4] response from [5] => loop B start
+[0] loop B end => send response to [5]
+[0] core is done
+[5] response from [0] => core is done
+[4] loop B end => core is done
+[3] loop B end => core is done
+[2] loop B end => core is done
+[4]: 70.290168902
+[1] loop B end => core is done
+[0]: 67.260418231
+[1]: 72.611412155
+[2]: 71.284065401
+[3]: 70.622814032
+[5]: 67.260194722
+[0] loop A start
+[1] loop A start
+[2] loop A start
+[3] loop A start
+[4] loop A start
+[5] loop A start
+[0] loop A end => request to [1] start
+[1] loop A end => send response to [0] and request to [2] start
+[0] response from [1] => loop B start
+[2] loop A end => send response to [1] and request to [3] start
+[1] response from [2] => loop B start
+[3] loop A end => send response to [2] and request to [4] start
+[2] response from [3] => loop B start
+[4] loop A end => send response to [3] and request to [5] start
+[3] response from [4] => loop B start
+[5] loop A end => send response to [4] and request to [0] start
+[4] response from [5] => loop B start
+[0] loop B end => send response to [5]
+[0] core is done
+[5] response from [0] => core is done
+[4] loop B end => core is done
+[3] loop B end => core is done
+[2] loop B end => core is done
+[4]: 70.310722460
+[1] loop B end => core is done
+[5]: 67.261212387
+[0]: 67.261693870
+[1]: 72.555611500
+[2]: 71.261975616
+[3]: 70.632100125
+[0] loop A start
+[1] loop A start
+[2] loop A start
+[3] loop A start
+[4] loop A start
+[5] loop A start
+[0] loop A end => request to [1] start
+[1] loop A end => send response to [0] and request to [2] start
+[0] response from [1] => loop B start
+[2] loop A end => send response to [1] and request to [3] start
+[1] response from [2] => loop B start
+[3] loop A end => send response to [2] and request to [4] start
+[2] response from [3] => loop B start
+[4] loop A end => send response to [3] and request to [5] start
+[3] response from [4] => loop B start
+[5] loop A end => send response to [4] and request to [0] start
+[4] response from [5] => loop B start
+[0] loop B end => send response to [5]
+[0] core is done
+[5] response from [0] => core is done
+[4] loop B end => core is done
+[3] loop B end => core is done
+[2] loop B end => core is done
+[4]: 70.295803539
+[1] loop B end => core is done
+[3]: 70.627961864
+[5]: 67.269090387
+[1]: 72.588575193
+[0]: 67.269454265
+[2]: 71.241196657
