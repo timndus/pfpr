@@ -10,14 +10,14 @@ y1 = []
 for i in range(0, 117):
     y1.append(10.2)
 
-for i in range(0, 64):
+for i in range(0, 594):
     y1.append(10.1)
 
-for i in range(0, 466):
-    y1.append(10.2)
+#for i in range(0, 466):
+#    y1.append(10.2)
 
-for i in range(0, 64):
-    y1.append(10.1)
+#for i in range(0, 64):
+#    y1.append(10.1)
 
 plt.plot(y1, label='pfpr_sock_freq_17')
 

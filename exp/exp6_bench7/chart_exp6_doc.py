@@ -2,6 +2,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+fig = plt.figure()
+ax = fig.add_subplot(1, 1, 1)
 
 y1 = []
 y2 = []
@@ -54,7 +56,10 @@ plt.plot(y5, '^', label='pfpr_sock')
 
 plt.xlabel('Sample Number')
 plt.ylabel('Execution Time (sec)')
+ax.grid(which='both')
+plt.xticks(np.arange(0, 20, 3))
+plt.yticks(np.arange(65, 86, 5))
 #plt.title('default_nemesis vs. default_sock vs. pfpr_nemesis_17_12 vs. pfpr_sock_17')
-plt.legend()
+plt.legend(loc='lower right')
 plt.savefig('no_title_default_nemesis_max_scaling_17_default_sock_max_scaling_17_vs_pfpr_nemesis_17_12_vs_pfpr_sock_17.png', dpi=500)
 plt.show()

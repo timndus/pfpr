@@ -10,11 +10,11 @@ y1 = []
 for i in range(0, 117):
     y1.append(10.2)
 
-for i in range(0, 117):
+for i in range(0, 703):
     y1.append(8.5)
 
-for i in range(0, 586):
-    y1.append(10.2)
+#for i in range(0, 586):
+#    y1.append(10.2)
 
 plt.plot(y1, label='default_sock_freq')
 
