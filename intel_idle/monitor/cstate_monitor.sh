@@ -8,7 +8,7 @@ do
 	do
 		for state in $state_list
 		do
-			cat $dir$state'/usage' >> cpu_$i_state_$state.log
+			cat $dir$state'/usage' >> $i$state.log
 		done
 	done
 done
