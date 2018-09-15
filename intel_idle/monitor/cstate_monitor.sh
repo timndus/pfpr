@@ -11,4 +11,5 @@ do
 			cat $dir$state'/usage' >> $i$state.log
 		done
 	done
+	sleep 0.1
 done
