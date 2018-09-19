@@ -43,16 +43,16 @@ int main(int argc, char** argv)
 		recv_source = 1;
 		send_source = 5;
 
-		printf("[%d] loop A start\n", world_rank);
+//		printf("[%d] loop A start\n", world_rank);
 		to_do(world_rank + 1);
-		printf("[%d] loop A end => request to [%d] start\n", world_rank, recv_source);
-    	MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-	    printf("[%d] response from [%d] => loop B start\n", world_rank, recv_source);
+//		printf("[%d] loop A end => request to [%d] start\n", world_rank, recv_source);
+		MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+//	    	printf("[%d] response from [%d] => loop B start\n", world_rank, recv_source);
 
 		to_do(5);
-		printf("[%d] loop B end => send response to [%d]\n", world_rank, send_source);
+//		printf("[%d] loop B end => send response to [%d]\n", world_rank, send_source);
 	   	MPI_Send(&number, 1, MPI_INT, send_source, 0, MPI_COMM_WORLD);
-		printf("[%d] core is done\n", world_rank);
+//		printf("[%d] core is done\n", world_rank);
 	}
 	else
 	{
@@ -61,27 +61,27 @@ int main(int argc, char** argv)
 			recv_source = 0;
 			send_source = 4;
 
-			printf("[%d] loop A start\n", world_rank);
+//			printf("[%d] loop A start\n", world_rank);
 			to_do(world_rank + 1);
-			printf("[%d] loop A end => send response to [%d] and request to [%d] start\n", world_rank, send_source, recv_source);
+//			printf("[%d] loop A end => send response to [%d] and request to [%d] start\n", world_rank, send_source, recv_source);
 		   	MPI_Send(&number, 1, MPI_INT, send_source, 0, MPI_COMM_WORLD);
-	    	MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-		    printf("[%d] response from [%d] => core is done\n", world_rank, recv_source);
+		    	MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+//			printf("[%d] response from [%d] => core is done\n", world_rank, recv_source);
 		}
 		else
 		{
 			recv_source = world_rank + 1;
 			send_source = world_rank - 1;
-			printf("[%d] loop A start\n", world_rank);
+//			printf("[%d] loop A start\n", world_rank);
 			to_do(world_rank + 1);
-			printf("[%d] loop A end => send response to [%d] and request to [%d] start\n", world_rank, send_source, recv_source);
+//			printf("[%d] loop A end => send response to [%d] and request to [%d] start\n", world_rank, send_source, recv_source);
 
 		   	MPI_Send(&number, 1, MPI_INT, send_source, 0, MPI_COMM_WORLD);
-	    	MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		    	MPI_Recv(&number, 1, MPI_INT, recv_source, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-	    	printf("[%d] response from [%d] => loop B start\n", world_rank, recv_source);
+//		    	printf("[%d] response from [%d] => loop B start\n", world_rank, recv_source);
 			to_do(steps - world_rank - 1 - 1);
-			printf("[%d] loop B end => core is done\n", world_rank);
+//			printf("[%d] loop B end => core is done\n", world_rank);
 		}
 	}
 
