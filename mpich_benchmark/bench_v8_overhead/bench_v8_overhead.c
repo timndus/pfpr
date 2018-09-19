@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define LOOP 2000000000
+#define LOOP 500000000
 
 /*
 #define LOOP4_4	4000000000
@@ -37,6 +37,10 @@ int main(int argc, char** argv)
 	int recv_source;
 	int send_source;
 	int steps = 7;
+
+	int repeat = 0;
+while (repeat < 4)
+{
 
 	if(world_rank == 0)
 	{
@@ -84,12 +88,14 @@ int main(int argc, char** argv)
 //			printf("[%d] loop B end => core is done\n", world_rank);
 		}
 	}
-
+repeat++;
+}
 	clock_gettime (CLOCK_REALTIME, &tend);
 	long int t = (tend.tv_sec * 1000000000 + tend.tv_nsec) - (tstart.tv_sec * 1000000000 + tstart.tv_nsec);
 	
 	MPI_Finalize();
 	printf("[%d]: %ld.%ld\n", world_rank, t / 1000000000, t % 1000000000 );
+
 }
 
 void to_do(int repeat)
