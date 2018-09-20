@@ -74,7 +74,7 @@ int main(int argc, char** argv)
 		}
 		printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all );
 		to_do(computation - comm_all);
-		printf("[%d]: to_do [%lf]start\n\n", computation);
+		printf("[%lf]: to_do [%lf]start\n\n", computation);
 		to_do(computation);
 	}
 	else
@@ -107,7 +107,7 @@ int main(int argc, char** argv)
 			}
 			printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all));
 			to_do(computation - comm_all);
-			printf("[%d]: to_do [%lf]start\n\n", computation);
+			printf("[%lf]: to_do [%lf]start\n\n", computation);
 			to_do(computation);
 		}
 		else
