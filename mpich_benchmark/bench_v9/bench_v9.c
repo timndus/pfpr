@@ -50,6 +50,8 @@ int main(int argc, char** argv)
 		recv_source = 1;
 		send_source = 5;
 
+		to_do( 0 * computation );
+
 		comm_all = 0;
 		for (int i = 0; i < comm_count; i++)
 		{
@@ -83,7 +85,7 @@ int main(int argc, char** argv)
 			send_source = 4;
 
 			printf("[%d]: to_do [%lf] start\n", world_rank, 4*computation);
-			to_do(5 * computation);
+			to_do( (world_rank - 1) * computation );
 			printf("[%d]: to_do finish\n\n", world_rank);
 
 			comm_all = 0;
@@ -117,7 +119,7 @@ int main(int argc, char** argv)
 			send_source = world_rank - 1;
 //			printf("[%d] loop A start\n", world_rank);
 
-			to_do( (world_rank - 1)*computation );
+			to_do( (world_rank - 1) * computation );
 
 			comm_all = 0;
 			for (int i = 0; i < comm_count; i++)
