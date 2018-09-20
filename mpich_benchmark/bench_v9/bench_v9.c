@@ -55,27 +55,27 @@ int main(int argc, char** argv)
 		comm_all = 0;
 		for (int i = 0; i < comm_count; i++)
 		{
-			printf("[%d]: Recv [%i] start, comm_all: [%lf]\n", world_rank, i, comm_all);
 			MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			comm_all += comm;
 			printf("[%d]: Recv [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 		}
-		printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all) + (4 * computation) );
-		to_do( (computation - comm_all) + (4 * computation) );
-		printf("[%d]: to_do finish\n\n", world_rank);
+		printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all );
+		to_do(computation - comm_all);
+		printf("[%d]: to_do [%lf]start\n\n", world_rank, 4 * computation);
+		to_do(4 * computation);
 
 		comm_all = 0;
 		for (int i = 0; i < comm_count; i++)
 		{
-			printf("[%d]: send_to_do [%i] start, comm_all: [%lf]\n", world_rank, i, comm_all);
 			to_do(comm);
 		   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
 			comm_all += comm;
 			printf("[%d]: send_to_do [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 		}
-		printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all) + computation );
-		to_do( (computation - comm_all) + computation );
-		printf("[%d]: to_do finish\n", world_rank);
+		printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all );
+		to_do(computation - comm_all);
+		printf("[%d]: to_do [%lf]start\n\n", computation);
+		to_do(computation);
 	}
 	else
 	{
@@ -86,12 +86,10 @@ int main(int argc, char** argv)
 
 			printf("[%d]: to_do [%lf] start\n", world_rank, 4*computation);
 			to_do( (world_rank - 1) * computation );
-			printf("[%d]: to_do finish\n\n", world_rank);
 
 			comm_all = 0;
 			for (int i = 0; i < comm_count; i++)
 			{
-				printf("[%d]: send_to_do [%i] start, comm_all: [%lf]\n", world_rank, i, comm_all);
 				to_do(comm);
 			   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
 				comm_all += comm;
@@ -99,19 +97,18 @@ int main(int argc, char** argv)
 			}
 			printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all);
 			to_do(computation - comm_all);
-			printf("[%d]: to_do finish\n", world_rank);
 
 			comm_all = 0;
 			for (int i = 0; i < comm_count; i++)
 			{
-				printf("[%d]: Recv [%i] start, comm_all: [%lf]\n", world_rank, i, comm_all);
 		    	MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 				comm_all += comm;
 				printf("[%d]: Recv [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 			}
-			printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all) + computation );
-			to_do( (computation - comm_all) + computation );
-			printf("[%d]: to_do finish\n", world_rank);
+			printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all));
+			to_do(computation - comm_all);
+			printf("[%d]: to_do [%lf]start\n\n", computation);
+			to_do(computation);
 		}
 		else
 		{
