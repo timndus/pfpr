@@ -7,10 +7,10 @@ void to_do(double val);
 
 int main(int argc, char** argv)
 {
-	double computation;
-	double comm;
-	int comm_count;
-
+	double computation = 400000000;
+	double comm = 100000000;
+	int comm_count = 1;
+/*
 	printf("%s\n", "Enter computation: ");
 	scanf("%lf", &computation);
 
@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 
 	printf("%s\n", "Enter comm_count: ");
 	scanf("%d", &comm_count);
-
+*/
 	struct timespec tstart;
 	struct timespec tend;
 	clock_gettime (CLOCK_REALTIME, &tstart);
