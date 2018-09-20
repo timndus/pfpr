@@ -43,6 +43,7 @@ int main(int argc, char** argv)
 	int steps = 8;
 	double comm_all;
 
+	printf("[%d]: first_to_do start\n", world_rank);
 	to_do(computation);
 	if(world_rank == 0)
 	{
@@ -53,10 +54,8 @@ int main(int argc, char** argv)
 		for (int i = 0; i < comm_count; i++)
 		{
 			printf("[%d]: Recv [%i] start, comm_all: [%lf]\n", world_rank, i, comm_all);
-
 			MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			comm_all += comm;
-			
 			printf("[%d]: Recv [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 		}
 		printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all) + (4 * computation) );
@@ -83,28 +82,34 @@ int main(int argc, char** argv)
 			recv_source = 0;
 			send_source = 4;
 
+			printf("[%d]: to_do [%lf] start\n", world_rank, 5*computation);
 			to_do(5 * computation);
-			
+			printf("[%d]: to_do finish\n\n", world_rank);
+
 			comm_all = 0;
 			for (int i = 0; i < comm_count; i++)
 			{
+				printf("[%d]: send_to_do [%i] start, comm_all: [%lf]\n", world_rank, i, comm_all);
 				to_do(comm);
 			   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
 				comm_all += comm;
+				printf("[%d]: send_to_do [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 			}
+			printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all);
 			to_do(computation - comm_all);
+			printf("[%d]: to_do finish\n", world_rank);
 
 			comm_all = 0;
 			for (int i = 0; i < comm_count; i++)
 			{
+				printf("[%d]: Recv [%i] start, comm_all: [%lf]\n", world_rank, i, comm_all);
 		    	MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 				comm_all += comm;
+				printf("[%d]: Recv [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 			}
+			printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all) + computation );
 			to_do( (computation - comm_all) + computation );
-
-//			printf("[%d] loop A start\n", world_rank);
-//			printf("[%d] loop A end => send response to [%d] and request to [%d] start\n", world_rank, send_source, recv_source);
-//			printf("[%d] response from [%d] => core is done\n", world_rank, recv_source);
+			printf("[%d]: to_do finish\n", world_rank);
 		}
 		else
 		{
