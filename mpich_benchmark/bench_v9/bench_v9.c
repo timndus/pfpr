@@ -43,7 +43,6 @@ int main(int argc, char** argv)
 	int steps = 8;
 	double comm_all;
 
-	printf("[%d]: first_to_do start\n", world_rank);
 	to_do(computation);
 	if(world_rank == 0)
 	{
@@ -57,11 +56,8 @@ int main(int argc, char** argv)
 		{
 			MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 			comm_all += comm;
-			printf("[%d]: Recv [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 		}
-		printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all );
 		to_do(computation - comm_all);
-		printf("[%d]: to_do [%lf]start\n\n", world_rank, 4 * computation);
 		to_do(4 * computation);
 
 		comm_all = 0;
@@ -70,11 +66,8 @@ int main(int argc, char** argv)
 			to_do(comm);
 		   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
 			comm_all += comm;
-			printf("[%d]: send_to_do [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 		}
-		printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all );
 		to_do(computation - comm_all);
-		printf("[%d]: to_do [%lf]start\n\n", world_rank, computation);
 		to_do(computation);
 	}
 	else
@@ -84,7 +77,6 @@ int main(int argc, char** argv)
 			recv_source = 0;
 			send_source = 4;
 
-			printf("[%d]: to_do [%lf] start\n", world_rank, 4*computation);
 			to_do( (world_rank - 1) * computation );
 
 			comm_all = 0;
@@ -93,28 +85,22 @@ int main(int argc, char** argv)
 				to_do(comm);
 			   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
 				comm_all += comm;
-				printf("[%d]: send_to_do [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 			}
-			printf("[%d]: to_do [%lf]start\n", world_rank, computation - comm_all);
 			to_do(computation - comm_all);
 
 			comm_all = 0;
 			for (int i = 0; i < comm_count; i++)
 			{
-		    	MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+		    		MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 				comm_all += comm;
-				printf("[%d]: Recv [%i] finish, comm_all: [%lf]\n\n", world_rank, i, comm_all);
 			}
-			printf("[%d]: to_do [%lf]start\n", world_rank, (computation - comm_all));
 			to_do(computation - comm_all);
-			printf("[%d]: to_do [%lf]start\n\n", world_rank, computation);
 			to_do(computation);
 		}
 		else
 		{
 			recv_source = world_rank + 1;
 			send_source = world_rank - 1;
-//			printf("[%d] loop A start\n", world_rank);
 
 			to_do( (world_rank - 1) * computation );
 
@@ -135,10 +121,6 @@ int main(int argc, char** argv)
 			}
 			to_do(computation - comm_all);
 			to_do( (steps - 2 - world_rank) * computation );
-
-//			printf("[%d] loop A end => send response to [%d] and request to [%d] start\n", world_rank, send_source, recv_source);
-//	    	printf("[%d] response from [%d] => loop B start\n", world_rank, recv_source);
-//			printf("[%d] loop B end => core is done\n", world_rank);
 		}
 	}
 	clock_gettime (CLOCK_REALTIME, &tend);
