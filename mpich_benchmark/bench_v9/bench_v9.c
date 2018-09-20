@@ -82,7 +82,7 @@ int main(int argc, char** argv)
 			recv_source = 0;
 			send_source = 4;
 
-			printf("[%d]: to_do [%lf] start\n", world_rank, 5*computation);
+			printf("[%d]: to_do [%lf] start\n", world_rank, 4*computation);
 			to_do(5 * computation);
 			printf("[%d]: to_do finish\n\n", world_rank);
 
