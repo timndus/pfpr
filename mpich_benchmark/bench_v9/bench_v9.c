@@ -34,7 +34,7 @@ int main(int argc, char** argv)
 	double comm_all;
 	
 	int repeat = 0;
-	while (repeat < 1)
+	while (repeat < 32)
 	{
 		to_do(computation);
 		if(world_rank == 0)
