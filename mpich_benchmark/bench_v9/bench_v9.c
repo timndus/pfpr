@@ -9,17 +9,7 @@ int main(int argc, char** argv)
 {
 	double computation = 400000000;
 	double comm = 100000000;
-	int comm_count = 1;
-/*
-	printf("%s\n", "Enter computation: ");
-	scanf("%lf", &computation);
-
-	printf("%s\n", "Enter comm: ");
-	scanf("%lf", &comm);
-
-	printf("%s\n", "Enter comm_count: ");
-	scanf("%d", &comm_count);
-*/
+	int comm_count = 3;
 	struct timespec tstart;
 	struct timespec tend;
 	clock_gettime (CLOCK_REALTIME, &tstart);
@@ -42,56 +32,32 @@ int main(int argc, char** argv)
 	int send_source;
 	int steps = 8;
 	double comm_all;
-
-	to_do(computation);
-	if(world_rank == 0)
+	
+	int repeat = 0;
+	while (repeat < 1)
 	{
-		recv_source = 1;
-		send_source = 5;
-
-		to_do( 0 * computation );
-
-		comm_all = 0;
-		for (int i = 0; i < comm_count; i++)
-		{
-			MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-			comm_all += comm;
-		}
-		to_do(computation - comm_all);
-		to_do(4 * computation);
-
-		comm_all = 0;
-		for (int i = 0; i < comm_count; i++)
-		{
-			to_do(comm);
-		   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
-			comm_all += comm;
-		}
-		to_do(computation - comm_all);
 		to_do(computation);
-	}
-	else
-	{
-		if(world_rank == 5)
+		if(world_rank == 0)
 		{
-			recv_source = 0;
-			send_source = 4;
+			recv_source = 1;
+			send_source = 5;
 
-			to_do( (world_rank - 1) * computation );
+			to_do( 0 * computation );
+
+			comm_all = 0;
+			for (int i = 0; i < comm_count; i++)
+			{
+				MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+				comm_all += comm;
+			}
+			to_do(computation - comm_all);
+			to_do(4 * computation);
 
 			comm_all = 0;
 			for (int i = 0; i < comm_count; i++)
 			{
 				to_do(comm);
-			   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
-				comm_all += comm;
-			}
-			to_do(computation - comm_all);
-
-			comm_all = 0;
-			for (int i = 0; i < comm_count; i++)
-			{
-		    		MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+				MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
 				comm_all += comm;
 			}
 			to_do(computation - comm_all);
@@ -99,30 +65,60 @@ int main(int argc, char** argv)
 		}
 		else
 		{
-			recv_source = world_rank + 1;
-			send_source = world_rank - 1;
-
-			to_do( (world_rank - 1) * computation );
-
-			comm_all = 0;
-			for (int i = 0; i < comm_count; i++)
+			if(world_rank == 5)
 			{
-				to_do(comm);
-			   	MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
-				comm_all += comm;
-			}
-			to_do(computation - comm_all);
+				recv_source = 0;
+				send_source = 4;
 
-			comm_all = 0;
-			for (int i = 0; i < comm_count; i++)
-			{
-		    	MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-				comm_all += comm;
+				to_do( (world_rank - 1) * computation );
+
+				comm_all = 0;
+				for (int i = 0; i < comm_count; i++)
+				{
+					to_do(comm);
+					MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
+					comm_all += comm;
+				}
+				to_do(computation - comm_all);
+
+				comm_all = 0;
+				for (int i = 0; i < comm_count; i++)
+				{
+					MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+					comm_all += comm;
+				}
+				to_do(computation - comm_all);
+				to_do(computation);
 			}
-			to_do(computation - comm_all);
-			to_do( (steps - 2 - world_rank) * computation );
+			else
+			{
+				recv_source = world_rank + 1;
+				send_source = world_rank - 1;
+
+				to_do( (world_rank - 1) * computation );
+
+				comm_all = 0;
+				for (int i = 0; i < comm_count; i++)
+				{
+					to_do(comm);
+					MPI_Send(&number, 1, MPI_INT, send_source, i, MPI_COMM_WORLD);
+					comm_all += comm;
+				}
+				to_do(computation - comm_all);
+
+				comm_all = 0;
+				for (int i = 0; i < comm_count; i++)
+				{
+				MPI_Recv(&number, 1, MPI_INT, recv_source, i, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+					comm_all += comm;
+				}
+				to_do(computation - comm_all);
+				to_do( (steps - 2 - world_rank) * computation );
+			}
 		}
+		repeat++;
 	}
+	
 	clock_gettime (CLOCK_REALTIME, &tend);
 	long int t = (tend.tv_sec * 1000000000 + tend.tv_nsec) - (tstart.tv_sec * 1000000000 + tstart.tv_nsec);
 	
