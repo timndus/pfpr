@@ -32,10 +32,10 @@ with open('pfpr_sock/pfpr_sock_4.log','r') as csvfile:
         y4.append(float(row[0]))
 
 
-plt.plot(y1, label='default_nemesis_repeat_4')
-plt.plot(y2, label='default_sock_repeat_4')
-plt.plot(y3, label='pfpr_nemesis_repeat_4')
-plt.plot(y4, label='pfpr_sock_repeat_4')
+plt.plot(y1, '*', label='default_nemesis_repeat_4')
+plt.plot(y2, '^', label='default_sock_repeat_4')
+plt.plot(y3, 'o', label='pfpr_nemesis_repeat_4')
+plt.plot(y4, '+', label='pfpr_sock_repeat_4')
 
 plt.xlabel('Sample Number')
 plt.ylabel('Execution Time (sec)')
