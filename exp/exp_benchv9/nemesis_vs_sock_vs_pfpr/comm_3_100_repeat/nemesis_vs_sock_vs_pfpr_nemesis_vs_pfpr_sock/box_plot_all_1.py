@@ -22,14 +22,14 @@ bplot1 = axes.boxplot(datam,
 #axes.set_title('Rectangular box plot')
 
 # fill with colors
-colors = ['pink', 'lightblue', 'lightgreen']
+colors = ['pink', 'lightblue', 'lightgreen', 'lightgreen']
 for patch, color in zip(bplot1['boxes'], colors):
    patch.set_facecolor(color)
 
 # adding horizontal grid lines
 axes.yaxis.grid(True)
-#axes.set_xlabel('Nemesis vs. Sock vs. PFPR_nemesis vs. PFPR_sock')
+axes.set_xlabel('Algorithm')
 axes.set_ylabel('Execution Time (sec)')
 
-plt.savefig('box_chart_nemesis_sock_pfpr_nemesis_pfpr_sock_repeat_1.png', dpi=500)
+plt.savefig('box_plot_all_1.png', dpi=500)
 plt.show()
